@@ -1,22 +1,22 @@
-package hello.proxy.pureproxy.decorator.code;
+package hello.proxy.pureproxy.concreateproxy.code;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class TimeDecorator implements Component{
+public class TimeProxy extends ConCreateLogic{
 
-    private Component component;
+    private ConCreateLogic conCreateLogic;
 
-    public TimeDecorator(Component component) {
-        this.component = component;
+    public TimeProxy(ConCreateLogic conCreateLogic) {
+        this.conCreateLogic = conCreateLogic;
     }
 
     @Override
     public String operation() {
-        log.info("TimeDecorator 실행");
+        log.info("TimeProxy 실행");
         long startTime = System.currentTimeMillis();
 
-        String result = component.operation();
+        String result = conCreateLogic.operation();
 
         long endTime = System.currentTimeMillis();
         long resultTime = endTime - startTime;
