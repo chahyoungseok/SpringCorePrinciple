@@ -48,7 +48,7 @@ public class ProxyFactoryConfigV1 {
 
     private Advisor getAdvisor(LogTrace trace) {
         NameMatchMethodPointcut pointcut = new NameMatchMethodPointcut();
-        pointcut.setMappedNames("request*, order*, save*");
+        pointcut.setMappedNames("request*", "order*", "save*");
 
         return new DefaultPointcutAdvisor(pointcut, new LogTraceAdvice(trace));
     }
