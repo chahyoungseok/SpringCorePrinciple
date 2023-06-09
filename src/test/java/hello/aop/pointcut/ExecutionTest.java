@@ -112,5 +112,38 @@ public class ExecutionTest {
         Assertions.assertThat(pointcut.matches(internalMethod, MemberServiceImpl.class)).isFalse();
     }
 
-    
+    // (String)
+    @Test
+    void argsMatch() {
+        pointcut.setExpression("execution(* *(String))");
+        Assertions.assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    // ()
+    @Test
+    void argsMatchNoArgs() {
+        pointcut.setExpression("execution(* *())");
+        Assertions.assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
+    }
+
+    // (Xxx)
+    @Test
+    void argsMatchStar() {
+        pointcut.setExpression("execution(* *(*))");
+        Assertions.assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    // (), (Xxx), (Xxx, Xxx)
+    @Test
+    void argsMatchAll() {
+        pointcut.setExpression("execution(* *(..))");
+        Assertions.assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    // (String), (String, Xxx), (String, Xxx, Xxx)
+    @Test
+    void argsMatchComplex() {
+        pointcut.setExpression("execution(* *(String, ..))");
+        Assertions.assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
 }
