@@ -1,7 +1,7 @@
 package com.example.mylittleannotation.domain.entity;
 
 
-import com.example.mylittleannotation.api.controller.dto.UserRequest;
+import com.example.mylittleannotation.api.controller.dto.request.UserRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -21,7 +21,7 @@ public class User {
     @Column
     private String name;
 
-    @Column
+    @Column(unique = true)
     private String id;
 
     @Column

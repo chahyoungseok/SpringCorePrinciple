@@ -9,6 +9,11 @@ spring:
     console:
       enabled: true
 
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:sql/data.sql
+
   jpa:
     database: h2
     properties:

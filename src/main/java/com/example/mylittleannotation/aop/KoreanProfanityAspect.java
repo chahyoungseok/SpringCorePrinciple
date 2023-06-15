@@ -1,7 +1,7 @@
 package com.example.mylittleannotation.aop;
 
 import com.example.mylittleannotation.aop.profanity.KoreanProfanityFilter;
-import com.example.mylittleannotation.api.controller.dto.UserRequest;
+import com.example.mylittleannotation.api.controller.dto.request.UserRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,12 +17,12 @@ public class KoreanProfanityAspect {
     private final KoreanProfanityFilter koreanProfanityFilter;
 
     @Pointcut("@annotation(com.example.mylittleannotation.aop.annotation.ProfanityFilter)")
-    public void responseType() {}
+    public void profanityFilter() {}
 
     @Pointcut("execution(* com.example.mylittleannotation.service..*.*(..))")
     public void allService() {}
 
-    @Around("responseType() && allService() && args(request, ..)")
+    @Around("profanityFilter() && allService() && args(request, ..)")
     public Object responseType(ProceedingJoinPoint joinPoint, UserRequest request) throws Throwable {
         if (request == null) {
             throw new IllegalArgumentException("UserRequest 가 파라미터 첫번째 위치에 없습니다.");

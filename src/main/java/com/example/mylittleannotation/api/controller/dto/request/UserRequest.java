@@ -1,4 +1,4 @@
-package com.example.mylittleannotation.api.controller.dto;
+package com.example.mylittleannotation.api.controller.dto.request;
 
 import com.example.mylittleannotation.domain.entity.Role;
 import lombok.Getter;
