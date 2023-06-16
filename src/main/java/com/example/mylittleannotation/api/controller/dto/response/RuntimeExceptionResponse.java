@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class IllegalArgumentExceptionResponse {
-    private final Exception exception = new IllegalArgumentException();
+public class RuntimeExceptionResponse {
+    private final Exception exception = new RuntimeException();
 
     private String message;
 

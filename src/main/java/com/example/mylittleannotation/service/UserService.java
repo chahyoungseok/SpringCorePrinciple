@@ -1,7 +1,9 @@
 package com.example.mylittleannotation.service;
 
 import com.example.mylittleannotation.aop.annotation.ProfanityFilter;
+import com.example.mylittleannotation.aop.annotation.RoleTokenAuthorization;
 import com.example.mylittleannotation.api.controller.dto.request.LoginRequest;
+import com.example.mylittleannotation.api.controller.dto.request.RoleTokenRequest;
 import com.example.mylittleannotation.api.controller.dto.request.UserRequest;
 import com.example.mylittleannotation.api.controller.dto.response.UserResponse;
 import com.example.mylittleannotation.domain.entity.Role;
@@ -16,16 +18,15 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public void readUser(Long id) {
-        userRepository.findById(id);
-    }
-
-    public void readRegister() {
-
-    }
-
-    public void readAdmin() {
-
+    @RoleTokenAuthorization
+    public String readUser(RoleTokenRequest roleToken) {
+        if (roleToken.getRoleToken().equals(Role.USER.toString())) {
+            return "USER_INFO";
+        } else if (roleToken.getRoleToken().equals(Role.REGISTER.toString())) {
+            return "REGISTER_INFO";
+        } else {
+            return "ADMIN_INFO";
+        }
     }
 
     @ProfanityFilter
@@ -41,8 +42,6 @@ public class UserService {
         if (request == null) {
             throw new IllegalArgumentException("LoginRequest 가 없습니다.");
         }
-
-        Role role = null;
 
         User user = userRepository.findUserById(request.getId());
         if (user.getPassword().equals(request.getPassword())) {

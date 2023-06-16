@@ -23,9 +23,9 @@ public class KoreanProfanityAspect {
     public void allService() {}
 
     @Around("profanityFilter() && allService() && args(request, ..)")
-    public Object responseType(ProceedingJoinPoint joinPoint, UserRequest request) throws Throwable {
+    public Object koreanProfanity(ProceedingJoinPoint joinPoint, UserRequest request) throws Throwable {
         if (request == null) {
-            throw new IllegalArgumentException("UserRequest 가 파라미터 첫번째 위치에 없습니다.");
+            throw new IllegalArgumentException("UserRequest 가 파라미터 첫번째 위치에 없거나 파라미터에 존재하지 않습니다.");
         }
 
         request.setProfanityFilter(

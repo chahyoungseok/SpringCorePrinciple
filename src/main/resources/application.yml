@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:mylittleannotation
+    url: jdbc:h2:mem:mylittleannotation;mode=mysql
     username: sa
     password:
 
