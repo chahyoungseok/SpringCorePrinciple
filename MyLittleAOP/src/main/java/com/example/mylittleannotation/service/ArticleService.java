@@ -43,5 +43,7 @@ public class ArticleService {
         for(Article article : articleList) {
             article.setOptimizeHit(article.getHits() + operations.get(REDIS_HIT_KEY, article.getPk()));
         }
+
+        operations.delete(REDIS_HIT_KEY);
     }
 }
