@@ -24,3 +24,8 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
     defer-datasource-initialization: true
     open-in-view: false
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
